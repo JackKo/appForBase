@@ -29,7 +29,10 @@ public enum  Elements {
             "div:nth-child(2) > " +
             "div:nth-child(2) > " +
             "input:nth-child(1)")),
-    LEAD_LIST(By.id("nav-leads"));
+    LEAD_LIST(By.id("nav-leads")),
+    DELETE_LEAD_BUTTON(By.cssSelector(".delete")),
+    DELETE_LEAD_BUTTON_CONFIRM(By.cssSelector("a.btn-primary:nth-child(2)"));
+//    DELETE_LEAD_BUTTON_CONFIRM(By.xpath("//a[text()='Remove']"));
 
 
     Elements(By locator) {

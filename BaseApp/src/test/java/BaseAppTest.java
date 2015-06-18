@@ -9,7 +9,9 @@ import org.openqa.selenium.support.ui.ExpectedConditions;
 import org.openqa.selenium.support.ui.WebDriverWait;
 import org.testng.SkipException;
 
+import java.util.Iterator;
 import java.util.List;
+import java.util.Set;
 
 import static com.base.app.Elements.*;
 
@@ -108,6 +110,29 @@ abstract class BaseAppTest {
                     throw new AssertionError("New status for lead is not updated properly");
                 }
             }
+        }
+    }
+
+    protected void removeLeadsByName(String lead_name) {
+        List<WebElement> leads = loadCreatedLeadsForName(lead_name, driver);
+
+        int foundLeads = leads.size();
+        for(int i = 0; i < foundLeads; i++) {
+
+            leads = loadCreatedLeadsForName(lead_name, driver);
+            if(leads.size()==0){
+                break;
+            }
+            WebElement lead = leads.get(0);
+            lead.click();
+            getElementSafetly(DELETE_LEAD_BUTTON).click();
+            driver.switchTo().activeElement();
+            try {
+                Thread.sleep(4000);
+            } catch (InterruptedException e) {
+
+            }
+            getElementSafetly(DELETE_LEAD_BUTTON_CONFIRM).click();
         }
     }
 }

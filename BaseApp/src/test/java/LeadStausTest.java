@@ -1,6 +1,3 @@
-import com.base.app.Elements;
-import org.apache.bcel.generic.NEW;
-import org.openqa.selenium.By;
 import org.testng.annotations.AfterTest;
 import org.testng.annotations.BeforeTest;
 import org.testng.annotations.Test;
@@ -41,5 +38,12 @@ public class LeadStausTest extends BaseAppTest {
         addNewAvailableStatus(NEW_STATUS);
 
         updateAllLeadsByNameWithStatus(LEAD_NAME, NEW_STATUS);
+
+        assertThat(getElementSafetly(LEAD_STATUS).getText(), equalTo(NEW_STATUS));
+    }
+
+    @AfterTest
+    public void cleanup(){
+        removeLeadsByName(LEAD_NAME);
     }
 }
